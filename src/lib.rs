@@ -1,3 +1,5 @@
+pub mod algos;
+
 pub trait Sorter {
     fn sort<T>(slice: &mut [T])
     where
@@ -11,10 +13,6 @@ where
 {
     S::sort(slice);
 }
-
-mod bubblesort;
-mod insertionsort;
-mod selectionsort;
 
 #[cfg(test)]
 mod tests {

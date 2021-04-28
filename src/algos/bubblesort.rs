@@ -1,4 +1,4 @@
-use super::Sorter;
+use crate::Sorter;
 
 pub struct BubbleSort;
 
@@ -24,7 +24,7 @@ impl Sorter for BubbleSort {
 fn bubble_works() {
     let mut things = vec![4, 2, 3, 1, 5];
 
-    super::sort::<_, BubbleSort>(&mut things);
+    crate::sort::<_, BubbleSort>(&mut things);
 
     assert_eq!(things, &[1, 2, 3, 4, 5]);
 }

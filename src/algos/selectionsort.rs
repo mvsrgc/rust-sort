@@ -1,4 +1,4 @@
-use super::Sorter;
+use crate::Sorter;
 
 pub struct SelectionSort;
 
@@ -22,7 +22,7 @@ impl Sorter for SelectionSort {
 fn selection_works() {
     let mut things = vec![11, 25, 12, 22, 64];
 
-    super::sort::<_, SelectionSort>(&mut things);
+    crate::sort::<_, SelectionSort>(&mut things);
 
     assert_eq!(things, &[11, 12, 22, 25, 64]);
 }
