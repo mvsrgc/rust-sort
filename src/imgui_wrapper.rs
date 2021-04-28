@@ -1,5 +1,6 @@
 use ggez::event::{KeyCode, KeyMods, MouseButton};
 use ggez::graphics;
+use ggez::input::mouse;
 use ggez::Context;
 
 use gfx_core::{handle::RenderTargetView, memory::Typed};
@@ -9,6 +10,20 @@ use imgui::*;
 use imgui_gfx_renderer::*;
 
 use std::time::Instant;
+
+fn to_winit_cursor(cursor: imgui::MouseCursor) -> mouse::MouseCursor {
+    match cursor {
+        imgui::MouseCursor::Arrow => mouse::MouseCursor::Arrow,
+        imgui::MouseCursor::TextInput => mouse::MouseCursor::Text,
+        imgui::MouseCursor::ResizeAll => mouse::MouseCursor::Move,
+        imgui::MouseCursor::ResizeNS => mouse::MouseCursor::NsResize,
+        imgui::MouseCursor::ResizeEW => mouse::MouseCursor::EwResize,
+        imgui::MouseCursor::ResizeNESW => mouse::MouseCursor::NeswResize,
+        imgui::MouseCursor::ResizeNWSE => mouse::MouseCursor::NwseResize,
+        imgui::MouseCursor::Hand => mouse::MouseCursor::Hand,
+        imgui::MouseCursor::NotAllowed => mouse::MouseCursor::NotAllowed,
+    }
+}
 
 #[derive(Copy, Clone, PartialEq, Debug, Default)]
 struct MouseState {
@@ -117,6 +132,13 @@ impl ImGuiWrapper {
                     ui.text(im_str!("Hi from this label!"));
                 });
             ui.show_demo_window(&mut show);
+
+            if let Some(cursor) = ui.mouse_cursor() {
+                mouse::set_cursor_hidden(ctx, false);
+                mouse::set_cursor_type(ctx, to_winit_cursor(cursor));
+            } else {
+                mouse::set_cursor_hidden(ctx, true);
+            }
         }
 
         // Render

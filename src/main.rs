@@ -5,8 +5,6 @@ use ggez::event::{self, EventHandler, KeyCode, KeyMods, MouseButton};
 use ggez::nalgebra::Point2;
 use ggez::{conf, graphics, Context, GameResult};
 
-use orst::algos::bubblesort::BubbleSort;
-
 const APP_WIDTH: f32 = 1280.0;
 const APP_HEIGHT: f32 = 720.0;
 
@@ -98,7 +96,6 @@ impl EventHandler for MainState {
     fn resize_event(&mut self, ctx: &mut Context, width: f32, height: f32) {
         graphics::set_screen_coordinates(ctx, graphics::Rect::new(0.0, 0.0, width, height))
             .unwrap();
-        //println!("{:?}", graphics::screen_coordinates(ctx));
     }
 
     fn mouse_wheel_event(&mut self, _ctx: &mut Context, x: f32, y: f32) {
